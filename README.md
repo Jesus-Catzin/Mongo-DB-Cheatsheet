@@ -29,6 +29,8 @@ The password element is only write if it is required.
 ```mongodb
  show dbs
 ```
+![alt text] (https://github.com/Jesus-Catzin/Mongo-DB-Cheatsheet/blob/master/Mongo%20Pictures/1.PNG "1")
+
 This will show you the whole databases in mongo including the ones you have created (if you have done it).
 
 ```mongodb
