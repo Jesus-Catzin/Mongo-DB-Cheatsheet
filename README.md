@@ -76,10 +76,11 @@ This will delete the whole documents in the collection
 ```mongodb
  db.collectionname.update({"key":"value"}, {"$set":{"key":"value_to_update"}})
 ```
-using update the "$set" must be in order to update the record.
+using update the "$set" must be in order to update the record. If it doesn't you will delete all the data in that document.
 ```mongodb
- 
+  db.collectionname.update({"key":"value"}, {"$set":{"key":"value_to_update"},{"multi":true}})
 ```
+Adding the {"multi":true} will uptade the whole documents matched
 ```mongodb
  
 ```
