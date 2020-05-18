@@ -45,12 +45,19 @@ This will show you the most important options in Mongo Shell
  db.collectionname.insert({"key":"atribute"})
 ```
 This will create or use a collection with that name, "insert" is used to insert the values like dictionaries in mongoDB where the first value is your key and the next is the atribute or values.
+* It must return: WriteResult({ "nInserted" : 1 }) if the result is okay!
+
 ```mongodb
- 
+ db.collectionname.find()
 ```
+"find" without any value inside return the whole collections' elements.
+
+If you add some parameter you can find with specific values.
+
 ```mongodb
- 
+ db.collectionname.find({})
 ```
+
 ```mongodb
  
 ```
