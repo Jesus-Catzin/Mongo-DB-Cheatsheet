@@ -24,3 +24,9 @@ he first thing would be opening the command window and use the link provided, in
 mongo "mongodb+srv://cluster0-cdd34.mongodb.net/next" --username YourUsernamehere password writehere
 ```
 The password element is only write if it is required.
+
+## Commands:
+```mongodb
+ show dbs
+```
+This will show you the whole databases in mongo including the ones you have created (if you have done it).
