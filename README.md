@@ -82,11 +82,14 @@ using update the "$set" must be in order to update the record. If it doesn't you
 ```
 Adding the {"multi":true} will uptade the whole documents matched
 ```mongodb
- 
+ db.collectionname.update({"key":"value"},{"$inc":{"count":1}})
 ```
+In this case "update" is necesary to modify it, the parameter "$inc" is a required in order to work. This will increase/decrease each time when the user does click in a field.
+
 ```mongodb
- 
+ db.collectionname.update({"key":"value"},{"$inc":{"count":1}}, {"upsert":true})
 ```
+Adding "upsert":true, will update de document, but if that document doesn't exist, it will create it automatically.
 ```mongodb
  
 ```
