@@ -42,8 +42,9 @@ help
 ```
 This will show you the most important options in Mongo Shell
 ```mongodb
- 
+ db.collectionname.insert({"key":"atribute"})
 ```
+This will create or use a collection with that name, "insert" is used to insert the values like dictionaries in mongoDB where the first value is your key and the next is the atribute or values.
 ```mongodb
  
 ```
