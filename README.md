@@ -72,10 +72,11 @@ This will delete the document(s) that will match with the provided query.
 ```mongodb
  db.collectionname.remove({})
 ```
-This will deleto the whole documents in the collection
+This will delete the whole documents in the collection
 ```mongodb
- 
+ db.collectionname.update({"key":"value"}, {"$set":{"key":"value_to_update"}})
 ```
+using update the "$set" must be in order to update the record.
 ```mongodb
  
 ```
