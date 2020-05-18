@@ -67,10 +67,12 @@ If you add some parameter you can find with specific values.
 ```mongodb
  db.collectionname.remove({"key":"value"})
 ```
-This will delete the document(s) that will match with the provided query.
+This will delete the document(s) that will match with the provided query. 
+
 ```mongodb
- 
+ db.collectionname.remove({})
 ```
+This will deleto the whole documents in the collection
 ```mongodb
  
 ```
