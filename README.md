@@ -91,8 +91,9 @@ In this case "update" is necesary to modify it, the parameter "$inc" is a requir
 ```
 Adding "upsert":true, will update de document, but if that document doesn't exist, it will create it automatically.
 ```mongodb
- 
+db.collectionname.update({},{"$unset":{"key":""}}, {"multi":true}) 
 ```
+the element "{}" is query the whole document, using the "$unset" if used to delete one element, if you add "multi":true, you will modify all the documents that matches it. 
 ```mongodb
  
 ```
