@@ -60,15 +60,14 @@ This will create or use a collection with that name, "insert" is used to insert 
 ```
 "find" without any value inside return the whole collections' elements.
 
+```mongodb
+ db.collectionname.find({"key":"value"})
+```
 If you add some parameter you can find with specific values.
-
 ```mongodb
- db.collectionname.find({})
+ db.collectionname.remove({"key":"value"})
 ```
-
-```mongodb
- 
-```
+This will delete the document(s) that will match with the provided query.
 ```mongodb
  
 ```
