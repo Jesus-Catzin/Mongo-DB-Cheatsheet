@@ -29,7 +29,39 @@ The password element is only write if it is required.
 ```mongodb
  show dbs
 ```
-![alt text] (https://github.com/Jesus-Catzin/Mongo-DB-Cheatsheet/blob/master/Mongo%20Pictures/1.PNG "1")
+```mongodb
+<jack>               0.000GB
+AndysToys            0.000GB
+GM_test              0.000GB
+Jeorval_test         0.000GB
+Sam                  0.000GB
+Sami_DB              0.000GB
+admin                0.000GB
+alexa_test           0.000GB
+brenda_test          0.000GB
+collectionTest       0.000GB
+erosa_greek          0.000GB
+fatima               0.000GB
+gonzalo              0.000GB
+isaac                0.000GB
+local               12.293GB
+menu_restaurant      0.000GB
+newLis               0.000GB
+nuevabd              0.000GB
+pabloe_duarte        0.000GB
+products             0.000GB
+sample_F             0.000GB
+sample_airbnb        0.051GB
+sample_analytics     0.009GB
+sample_geospatial    0.001GB
+sample_mflix         0.042GB
+sample_supplies      0.001GB
+sample_training      0.059GB
+sample_weatherdata   0.002GB
+test                 0.002GB
+test_potions         0.000GB
+usuarios             0.000GB
+```
 
 This will show you the whole databases in mongo including the ones you have created (if you have done it).
 
