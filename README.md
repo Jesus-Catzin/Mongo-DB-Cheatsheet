@@ -65,9 +65,9 @@ test_potions         0.000GB
 usuarios             0.000GB
 ```
 This will allow you use one database or if the database doesn't exist it will automatically create it.
+In this case we will use "sample_airbnb" to work with.
 ```mongodb
- use "database name"
-
+ use "sample_airbnb"
 ```
 This will show you the most important options in Mongo Shell
 ```mongodb
@@ -101,7 +101,12 @@ This return the database name you are.
 ```mongodb
  db.getName()
 ```
-This return the database name you are.
+```mongodb
+sample_airbnb
+``` 
+```
+switched to db sample_airbnb
+```
 ```mongodb
  db.dropDatabase()
 ```
