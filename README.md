@@ -69,6 +69,9 @@ In this case we will use "sample_airbnb" to work with.
 ```mongodb
  use "sample_airbnb"
 ```
+```
+switched to db sample_airbnb
+```
 This will show you the most important options in Mongo Shell
 ```mongodb
 help 
@@ -104,9 +107,7 @@ This return the database name you are.
 ```mongodb
 sample_airbnb
 ``` 
-```
-switched to db sample_airbnb
-```
+
 ```mongodb
  db.dropDatabase()
 ```
