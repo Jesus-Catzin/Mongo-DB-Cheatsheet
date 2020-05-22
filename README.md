@@ -122,13 +122,14 @@ This will create or use a collection with that name, "insert" is used to insert 
 ## Starting With Queries
 "find" without any value inside return the whole collections' elements.
 ```mongodb
- db.collectionname.find()
+ db.listingsAndReviews.find()
 ```
-
+In this case I won't run it because it's too long. 
 
 ```mongodb
- db.collectionname.find({"key":"value"})
+ db.listingAndReviews.find({ "name": "Ribeira Charming Duplex"})
 ```
+In this case I won't run it because it's too long, but with this specifications it will find the documents that matches it!
 If you add some parameter you can find with specific values.
 ```mongodb
  db.collectionname.remove({"key":"value"})
