@@ -107,21 +107,22 @@ This return the database name you are.
 ```mongodb
 sample_airbnb
 ``` 
-
+You delete the actual database you are
 ```mongodb
  db.dropDatabase()
 ```
-You delete the actual database you are
+This will create or use a collection with that name, "insert" is used to insert the values like dictionaries in mongoDB where the first value is your key and the next is the atribute or values.
 ```mongodb
  db.collectionname.insert({"key":"atribute"})
 ```
-This will create or use a collection with that name, "insert" is used to insert the values like dictionaries in mongoDB where the first value is your key and the next is the atribute or values.
+
 * It must return: WriteResult({ "nInserted" : 1 }) if the result is okay!
 
+"find" without any value inside return the whole collections' elements.
 ```mongodb
  db.collectionname.find()
 ```
-"find" without any value inside return the whole collections' elements.
+
 
 ```mongodb
  db.collectionname.find({"key":"value"})
