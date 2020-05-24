@@ -259,25 +259,36 @@ Use "$addToSet" to do the same as push, but if there exist the element it won't 
 ```mongodb
 db.catzin.update({"director":"Pablo"}, {"$addToSet":{"generos":"romance"}}) 
 ```
+Use "$pull" if to remove any instance, careful: if the element is repited inside the array, it will delete it. 
+```mongodb
+db.catzin.update({"director":"Pablo"}, {"$pull":{"generos":"romance"}}) 
+```
+Quering by multiplies criteria. 
+```mongodb
+ db.catzin.find({"director":"Pablo", "ratings.mala":5})
+```
+We can use logical operator in our queries to look for information.
+* lt = less than
+* gt = greater than
+* lte =less than or equal
+* gte =greater than or equal
+* ne = not equal to
+```mongodb
+ db.catzin.find({"año":{"$lt":2012}})
+```
+You can combine more than one:
+```mongodb
+db.catzin.find({"año":{"$lt":2012, "$gt":2000}}) 
+```
+Using ne
+```mongodb
+ db.catzin.find({"director":{"$ne":"Pablo"}})
+```
+Use "$elemMatch" to match any result where at least one match it. 
+```mongodb
+db.catzin.find({"año":{"$elemMatch":{"$gt":2005, "$lt":2012}}})
+```
 
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
 ```mongodb
  
 ```
