@@ -131,36 +131,40 @@ In this case I won't run it because it's too long.
 ```
 In this case I won't run it because it's too long, but with this specifications it will find the documents that matches it!
 If you add some parameter you can find with specific values.
-```mongodb
- db.collectionname.remove({"key":"value"})
-```
-This will delete the document(s) that will match with the provided query. 
 
+
+This will delete the document(s) that will match with the provided query. 
 ```mongodb
- db.collectionname.remove({})
+ db.catzin.remove({"nombre":"El Espantapajaros"})
 ```
+
 This will delete the whole documents in the collection
 ```mongodb
- db.collectionname.update({"key":"value"}, {"$set":{"key":"value_to_update"}})
+ db.catzin.remove({})
 ```
 using update the "$set" must be in order to update the record. If it doesn't you will delete all the data in that document.
 ```mongodb
-  db.collectionname.update({"key":"value"}, {"$set":{"key":"value_to_update"},{"multi":true}})
+ db.collectionname.update({"key":"value"}, {"$set":{"key":"value_to_update"}})
 ```
 Adding the {"multi":true} will uptade the whole documents matched
 ```mongodb
+  db.collectionname.update({"key":"value"}, {"$set":{"key":"value_to_update"},{"multi":true}})
+```
+
+In this case "update" is necesary to modify it, the parameter "$inc" is a required in order to work. This will increase/decrease each time when the user does click in a field.
+```mongodb
  db.collectionname.update({"key":"value"},{"$inc":{"count":1}})
 ```
-In this case "update" is necesary to modify it, the parameter "$inc" is a required in order to work. This will increase/decrease each time when the user does click in a field.
 
+Adding "upsert":true, will update de document, but if that document doesn't exist, it will create it automatically.
 ```mongodb
  db.collectionname.update({"key":"value"},{"$inc":{"count":1}}, {"upsert":true})
 ```
-Adding "upsert":true, will update de document, but if that document doesn't exist, it will create it automatically.
+the element "{}" is query the whole document, using the "$unset" if used to delete one element, if you add "multi":true, you will modify all the documents that matches it. 
 ```mongodb
 db.collectionname.update({},{"$unset":{"key":""}}, {"multi":true}) 
 ```
-the element "{}" is query the whole document, using the "$unset" if used to delete one element, if you add "multi":true, you will modify all the documents that matches it. 
+
 ```mongodb
  
 ```
