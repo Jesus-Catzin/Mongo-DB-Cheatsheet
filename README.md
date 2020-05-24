@@ -175,23 +175,79 @@ Before to use rename:
 ```
 After use rename:
 ```mongodb
- { "_id" : ObjectId("5ec2441f1110b504b83542fd"), "nombre" : "La momia", "autor" : "Pablo", "año" : 2009, "generos" : [ "horror", "misterio", "accion", "romance", "ciencia ficcion" ], "ratings" : { "buena" : 20, "mala" : 5 } }
+{
+        "_id" : ObjectId("5ec2441f1110b504b83542fd"),
+        "nombre" : "La momia",
+        "año" : 2009,
+        "generos" : [
+                "horror",
+                "misterio",
+                "accion",
+                "romance",
+                "ciencia ficcion"
+        ],
+        "ratings" : {
+                "buena" : 20,
+                "mala" : 5
+        },
+        "director" : "Pablo"
+}
 ```
+
+We can update values in our collections using dot notation when those are in an array. The order and positions are necesary to work with this.
 ```mongodb
- 
+ db.catzin.update({"nombre":"La momia"}, {"$set":{"generos.0":"comedia"}})
 ```
+After Modification:
 ```mongodb
- 
+ {
+        "_id" : ObjectId("5ec2441f1110b504b83542fd"),
+        "nombre" : "La momia",
+        "año" : 2009,
+        "generos" : [
+                "comedia",
+                "misterio",
+                "accion",
+                "romance",
+                "ciencia ficcion"
+        ],
+        "ratings" : {
+                "buena" : 20,
+                "mala" : 5
+        },
+        "director" : "Pablo"
+}
 ```
+Updating without know the positions.
 ```mongodb
- 
+ db.catzin.update({"generos":"accion"}, {"$set":{"generos.$":"action"}})
 ```
+Output:
+
 ```mongodb
- 
+  {
+        "_id" : ObjectId("5ec2441f1110b504b83542fd"),
+        "nombre" : "La momia",
+        "año" : 2009,
+        "generos" : [
+                "comedia",
+                "misterio",
+                "action",
+                "romance",
+                "ciencia ficcion"
+        ],
+        "ratings" : {
+                "buena" : 20,
+                "mala" : 5
+        },
+        "director" : "Pablo"
+}
 ```
+We can also update using dot notation + the field to update.
 ```mongodb
- 
+ db.catzin.update({"nombre":"La momia"}, {"$set":{"ratings.buena": 25}})
 ```
+
 ```mongodb
  
 ```
