@@ -165,14 +165,17 @@ the element "{}" is query the whole document, using the "$unset" if used to dele
 db.collectionname.update({},{"$unset":{"key":""}}, {"multi":true}) 
 ```
 
+Using "$rename" we can change the name of one field  (key) in our collections, {"multi":true} it's optional, if you add it you will rename the whole documents that maches it. 
 ```mongodb
- 
+ db.catzin.update({}, {"$rename":{"autor":"director"}}, {"multi":true})
 ```
+Before to use rename:
 ```mongodb
- 
+ { "_id" : ObjectId("5ec2441f1110b504b83542fd"), "nombre" : "La momia", "autor" : "Pablo", "año" : 2009, "generos" : [ "horror", "misterio", "accion", "romance", "ciencia ficcion" ], "ratings" : { "buena" : 20, "mala" : 5 } }
 ```
+After use rename:
 ```mongodb
- 
+ { "_id" : ObjectId("5ec2441f1110b504b83542fd"), "nombre" : "La momia", "autor" : "Pablo", "año" : 2009, "generos" : [ "horror", "misterio", "accion", "romance", "ciencia ficcion" ], "ratings" : { "buena" : 20, "mala" : 5 } }
 ```
 ```mongodb
  
