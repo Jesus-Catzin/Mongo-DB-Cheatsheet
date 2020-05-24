@@ -305,24 +305,28 @@ use skip to skip an amount of elements
 ```mongodb
 db.listingsAndReviews.find({"bed_type":"Real Bed"},{"name":true, "room_type":true, "bed_type":true}).skip(3).limit(2) 
 ```
+Output:
+```mongodb
+{ "_id" : "10133350", "name" : "2 bedroom Upper east side", "room_type" : "Entire home/apt", "bed_type" : "Real Bed" }
+{ "_id" : "10138784", "name" : "Room Close to LGA and 35 mins to Times Square", "room_type" : "Private room", "bed_type" : "Real Bed" } 
+```
+Referencing documents to avoid Duplicateds.
+```mongodb
+ db.vendors.insert({"_id":"Kettelcooked", "phone":5555555, "organic":true})
+```
+```mongodb
+ db.potions.insert({"name":"Inisibility","vendedor_id":"Kettlecooked"})
+```
+Querying a referency document.
+```mongodb
+db.potions.find({"name":"Invisibility"})
+```
+```mongodb
+ db.potions.find({"_id":"Kettlecooked"})
+```
 
 ```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
+
 ```
 ```mongodb
  
