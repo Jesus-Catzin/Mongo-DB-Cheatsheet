@@ -247,16 +247,19 @@ We can also update using dot notation + the field to update.
 ```mongodb
  db.catzin.update({"nombre":"La momia"}, {"$set":{"ratings.buena": 25}})
 ```
+Using "$pop" you can delete the first or last element in your array. -1 for the first element, 1 for the last. 
+```mongodb
+db.catzin.update({"director":"Pablo"}, {"$pop":{"generos":1}}) 
+```
+Use "$push" to add the element in the end of the array.
+```mongodb
+ db.catzin.update({"director":"Pablo"}, {"$push":{"generos":"romance"}})
+```
+Use "$addToSet" to do the same as push, but if there exist the element it won't be add.
+```mongodb
+db.catzin.update({"director":"Pablo"}, {"$addToSet":{"generos":"romance"}}) 
+```
 
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
 ```mongodb
  
 ```
