@@ -293,17 +293,19 @@ If you add the true to the fields it will only return you that especific field, 
 ```mongodb
 db.catzin.find({"año":{"$gte":2000}}, {"director":true, "nombre":true})
 ```
+use "$sort" when you want to sort the elemets by a criteria. 1 to order ascending and -1 to order descending.
+```mongodb
+db.catzin.find().sort({"año":1})
+```
+Use limit to set the amount of result you want
+```mongodb
+db.catzin.find().sort({"año":1}).limit(1)
+```
+use skip to skip an amount of elements
+```mongodb
+db.listingsAndReviews.find({"bed_type":"Real Bed"},{"name":true, "room_type":true, "bed_type":true}).skip(3).limit(2) 
+```
 
-
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
 ```mongodb
  
 ```
