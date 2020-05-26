@@ -364,55 +364,45 @@ Other:
 ```mongodb
 db.listingsAndReviews.aggregate([{"$match":{"beds":{"$lt":5}}}]) 
 ```
+Sorting by criterias
+```mongodb
+db.listingsAndReviews.aggregate([{"$match":{"property_type":"House"}}, {"$sort":{"minimum_nights":-1}}]).pretty() 
+```
+Otput:
+```mongodb
+ {
+                        "_id" : "251395687",
+                        "date" : ISODate("2018-04-08T04:00:00Z"),
+                        "listing_id" : "21625832",
+                        "reviewer_id" : "61921743",
+                        "reviewer_name" : "Rue",
+                        "comments" : "The place is described as it is, very nice and homey! Everything was provided for and communication was excellent. The house is just a moments walk away from the beach and the living room view is stunning. Thank you for such a great stay!"
+                },
+                {
+                        "_id" : "255884862",
+                        "date" : ISODate("2018-04-22T04:00:00Z"),
+                        "listing_id" : "21625832",
+                        "reviewer_id" : "181515803",
+                        "reviewer_name" : "Renee",
+                        "comments" : "Ticks every single box! Amazing house in a relaxing setting, with everything you could possibly need & more. We can’t wait to go back again. Highly recommend."
+                },
+                {
+                        "_id" : "268381711",
+                        "date" : ISODate("2018-05-24T04:00:00Z"),
+                        "listing_id" : "21625832",
+                        "reviewer_id" : "20795612",
+                        "reviewer_name" : "Leo",
+                        "comments" : "Beautiful spacious tranquil house with amazing views"
+                }
+```
+Using projections and more than one task (it has a small mistake):
+```mongodb
+ db.listingsAndReviews.aggregate([{"$match":{"property_type":"House"}},{"$match":{"number_of_reviews":{"$gt":10}}},{"$group":{"_id":"$address.country","property_count":{"$sum":1}}},{"$sort":{"price":1}},{"$limit":3}, {"$project":{"_id":true,"name":true, "property_type":true, "room_type":true,"cancellation_policy":true}}])
+```
+### Some queries using python.
 
-```mongodb
+```python
  
 ```
-```mongodb
+
  
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
