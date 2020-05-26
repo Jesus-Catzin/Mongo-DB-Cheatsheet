@@ -324,25 +324,47 @@ db.potions.find({"name":"Invisibility"})
 ```mongodb
  db.potions.find({"_id":"Kettlecooked"})
 ```
+We can use aggregatte to make more complex functions.
+```mongodb
+db.listingsAndReviews.aggregate([{"$group":{"_id":"$address.country", "total":{"$sum":1}}}])
+```
+Output:
+```mongodb
+{ "_id" : "United States", "total" : 1222 }
+{ "_id" : "Spain", "total" : 633 }
+{ "_id" : "Portugal", "total" : 555 }
+{ "_id" : "Canada", "total" : 649 }
+{ "_id" : "Australia", "total" : 610 }
+{ "_id" : "Turkey", "total" : 661 }
+{ "_id" : "Hong Kong", "total" : 600 }
+{ "_id" : "China", "total" : 19 }
+{ "_id" : "Brazil", "total" : 606 } 
+```
+Another Combination:
+```mongodb
+db.listingsAndReviews.aggregate([{"$group":{"_id":"$address.country", "total":{"$sum":1}, "max_nights":{"$max":"$maximum_nights"}}}]) 
+```
+Output:
+```mongodb
+{ "_id" : "Canada", "total" : 649, "max_nights" : "90" }
+{ "_id" : "Australia", "total" : 610, "max_nights" : "99" }
+{ "_id" : "Spain", "total" : 633, "max_nights" : "93" }
+{ "_id" : "Portugal", "total" : 555, "max_nights" : "900" }
+{ "_id" : "Hong Kong", "total" : 600, "max_nights" : "999" }
+{ "_id" : "China", "total" : 19, "max_nights" : "7" }
+{ "_id" : "Brazil", "total" : 606, "max_nights" : "99" }
+{ "_id" : "United States", "total" : 1222, "max_nights" : "999" }
+{ "_id" : "Turkey", "total" : 661, "max_nights" : "92" }
+```
+Another Example:
+```mongodb
+ db.listingsAndReviews.aggregate([{"$match":{"bed_type":"Real Bed"}},{"$group":{"_id":"$host.host_id", "room_type":{"$sum":1}}}])
+```
+Other:
+```mongodb
+db.listingsAndReviews.aggregate([{"$match":{"beds":{"$lt":5}}}]) 
+```
 
-```mongodb
-
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
-```mongodb
- 
-```
 ```mongodb
  
 ```
