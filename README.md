@@ -480,12 +480,103 @@ docs = sorted(docs, key=itemgetter("year"))
 print([doc["year"] for doc in docs][:5])
 ```
 As in MongoShell, we can use limit and skip too, so I won't repite it here. 
-```python
-```
-```python
-```
 
+Sorting and Skipping in the same time.
 ```python
+from collections import OrderedDict
+list(db.laureates.aggregate([
+{"$match": {"bornCountry": "USA"}},
+{"$project": {"prizes.year": 1, "_id": 0}},
+{"$sort": OrderedDict([("prizes.year", 1)])},
+{"$skip": 1},
+{"$limit": 3}
+]))
 ```
+More than one multiparameter:
 ```python
+db.laureates.aggregate([
+{"$project": {"solo_winner": {"$in": ["1", "$prizes.share"]}}}
+]).next()
+```
+Sizing and Summing
+```python
+list(db.prizes.aggregate([
+{"$project": {"n_laureates": {"$size": "$laureates"},
+"category": 1}},
+{"$group": {"_id": "$category", "n_laureates":
+{"$sum": "$n_laureates"}}},
+{"$sort": {"n_laureates": -1}},
+]))
+```
+Output:
+```python
+[{'_id': 'medicine', 'n_laureates': 216},
+{'_id': 'physics', 'n_laureates': 210},
+{'_id': 'chemistry', 'n_laureates': 181},
+{'_id': 'peace', 'n_laureates': 133},
+{'_id': 'literature', 'n_laureates': 114},
+{'_id': 'economics', 'n_laureates': 81}]
+```
+Using $unwind
+```python
+list(db.prizes.aggregate([
+{"$unwind": "$laureates"},
+{"$project": {
+"_id": 0, "year": 1, "category": 1,
+"laureates.surname": 1, "laureates.share": 1}},
+{"$limit": 3}
+]))
+```
+Output
+```python
+[{'year': '2018',
+'category': 'physics',
+'laureates': {'surname': 'Ashkin', 'share': '2'}},
+{'year': '2018',
+'category': 'physics',
+'laureates': {'surname': 'Mourou', 'share': '4'}},
+{'year': '2018',
+'category': 'physics',
+'laureates': {'surname': 'Strickland', 'share': '4'}}]
+```
+Using $lookup
+```python
+list(db.prizes.aggregate([
+{"$match": {"category": "economics"}},
+{"$unwind": "$laureates"},
+{"$lookup": {"from": "laureates", "foreignField": "id",
+"localField": "laureates.id", "as": "laureate_bios"
+{"$unwind": "$laureate_bios"},
+{"$group": {"_id": None,
+"bornCountries":
+{"$addToSet": "$laureate_bios.bornCountry"}
+}},
+]))
+```
+Output:
+```python
+[{'_id': None,
+'bornCountries': [
+'the Netherlands', 'British West Indies (now Saint Lucia)', 'Ita
+'Germany (now Poland)', 'Hungary', 'Austria', 'India', 'USA',
+'Canada', 'British Mandate of Palestine (now Israel)', 'Norway',
+'Russian Empire (now Russia)', 'Russia', 'Finland', 'Scotland',
+'France', 'Sweden', 'Germany', 'Russian Empire (now Belarus)',
+'United Kingdom', 'Cyprus'
+]}]
+```
+Making a bucked list:
+```python
+docs = list(db.laureates.aggregate([
+...,
+{"$project": {"died": {"$dateFromString": {"dateString": "$died"}},
+"born": {"$dateFromString": {"dateString": "$born"}}}},
+{"$project": {"years": {"$floor": {"$divide": [
+{"$subtract": ["$died", "$born"]},
+31557600000 # 1000 * 60 * 60 * 24 * 365.25
+]}}}},
+{"$bucket": {"groupBy": "$years",
+"boundaries": list(range(30, 120, 10))}}
+]))
+for doc in docs: print(doc)
 ```
