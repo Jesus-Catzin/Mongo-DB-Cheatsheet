@@ -400,9 +400,92 @@ Using projections and more than one task (it has a small mistake):
  db.listingsAndReviews.aggregate([{"$match":{"property_type":"House"}},{"$match":{"number_of_reviews":{"$gt":10}}},{"$group":{"_id":"$address.country","property_count":{"$sum":1}}},{"$sort":{"price":1}},{"$limit":3}, {"$project":{"_id":true,"name":true, "property_type":true, "room_type":true,"cancellation_policy":true}}])
 ```
 ### Some queries using python.
+##### Before to run any code or tries it you need to install the mongo module and import it in python, also in this case, the examples where taken from a course from datacamp. 
 
 ```python
+ import requests from pymongo
+ import MongoClient
+```
+Supposing that we have already get the database from mongo.
+We can use ".count_documents()" to get the amount that are there according to some conditions.
+```python
+db.laureates.count_documents({
+"prizes.affiliations.name": (
+"University of California")})
+```
+If we use "$in" we will return any documents with match at least one criteria.
+It's important to know that those are the same operator as in mongo, so I won't repeat it.
+```python
+# Save a filter for laureates born in the USA, Canada, or Mexico
+criteria = { "bornCountry": 
+                { "$in":["USA", "Canada", "Mexico"]}
+             }
+
+# Count them and save the count
+count = db.laureates.count_documents(criteria)
+print(count)
+```
+If you use "$exists" true/false you will return the values that have that field or doesn't have.
+```python
+db.laureates.count_documents({"bornCountry": {"$exists": False}})
+```
+We can use "distinct" to return the different values inside a document that are not repeat.
+```python
+db.laureates.distinct("gender")
+```
+We use "find_one" to return one document.
+```python
+db.laureates.find_one({"prizes.share": "4"}
+```
+We can also combine "$exists" with "distinct"
+```python
+b.laureates.distinct(
+"prizes.category", {"prizes.1": {"$exists": True}})
+```
+We can use the "$elemMatch" to match especific values with some criterias.
+```python
+db.laureates.count_documents({
+"prizes": {"$elemMatch": {
+"category": "physics",
+"share": "1",
+"year": {"$lt": "1945"},}}})
+```
+We can use "$regex" to find a specific values which has those substrings.
+```python
+db.laureates.distinct("bornCountry",
+{"bornCountry": {"$regex": "Poland"}})
+```
+We can also do better finding importing regex and using some characters.
+If we use "^" at the beggining we will find values with start with value passed 
+```python
+from bson.regex import Regex
+db.laureates.distinct("bornCountry",
+{"bornCountry": Regex("^Poland")})
+```
+If we use projections, we set 1 to return the field and 0 in the other hand.
+```python
+docs = db.laureates.find(
+filter={},
+projection={"prizes.affiliations": 1,
+"_id": 0})
+```
  
+We can use "sorted" to sort by values.
+```python
+docs = list(db.prizes.find({"category": "physics"}, ["year"]))
+print([doc["year"] for doc in docs][:5])
+```
+```python
+docs = sorted(docs, key=itemgetter("year"))
+print([doc["year"] for doc in docs][:5])
+```
+As in MongoShell, we can use limit and skip too, so I won't repite it here. 
+```python
+```
+```python
 ```
 
- 
+```python
+```
+```python
+```
